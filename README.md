@@ -1,188 +1,313 @@
-# NERVE NOC
+# NERVE NOC — Network Emergency & Risk Visualization Engine
 
-### Network Emergency & Risk Visualization Engine
+### AI-Powered Telecom Network Diagnostic Command Center
 
-> **AI-powered network operations command center for telecom fault prediction, explainable diagnostics, counterfactual analysis, and evidence-grounded troubleshooting.**
+NERVE NOC is an AI-powered **Network Operations Center (NOC) decision-support platform** designed for telecom fault prediction, explainable diagnostics, counterfactual analysis, historical evidence retrieval, and evidence-grounded troubleshooting.
 
-NERVE NOC is a machine-learning-powered **Network Operations Center (NOC) decision-support system** built on the **Telstra Network Disruptions dataset**.
+Built using the **Telstra Network Disruptions dataset**, NERVE NOC transforms network telemetry into actionable diagnostic intelligence through machine learning, Explainable AI, Retrieval-Augmented Generation, and interactive what-if simulation.
 
-Instead of stopping at *“this device is likely to fail,”* NERVE NOC combines **fault prediction, explainability, historical evidence retrieval, what-if simulation, and SOP verification** into a single diagnostic workflow.
-
-The system is designed around a practical NOC question:
+Instead of simply answering **“Is this device likely to fail?”**, NERVE NOC helps operators understand:
 
 > **What is wrong, why is it happening, what evidence supports the diagnosis, and what should the operator do next?**
 
 ---
 
-## Why NERVE NOC?
+## 🚀 Features
 
-Traditional fault prediction systems often produce a prediction without enough context for an operator to act on it.
-
-NERVE NOC extends the prediction pipeline into an operator-facing diagnostic workflow:
-
-```text
-Telemetry
-   ↓
-Feature Engineering
-   ↓
-XGBoost Fault Prediction
-   ↓
-SHAP Explainability
-   ↓
-Historical Evidence + SOP Retrieval
-   ↓
-Counterfactual Simulation
-   ↓
-Operator Recommendation
-   ↓
-Incident Report
-```
-
-This creates a bridge between **machine-learning inference** and **NOC operational decision-making**.
-
----
-
-## System Architecture
-
-```mermaid
-flowchart TB
-
-    U[Network Operator]
-
-    subgraph UI["Streamlit NOC Command Center"]
-        F[Fleet Overview]
-        O[Operations Workspace]
-        D[Device Diagnostics]
-        W[What-If Simulator]
-        T[Tilly NOC Assistant]
-    end
-
-    subgraph CORE["NERVE Intelligence Layer"]
-        FE[Feature Engineering]
-        ML[XGBoost Fault Classifier]
-        SHAP[SHAP TreeExplainer]
-        RAG[FAISS Retrieval Engine]
-        IR[Hybrid Intent Router]
-        REC[SOP Recommendation Engine]
-        CF[Counterfactual Engine]
-    end
-
-    subgraph DATA["Data & Knowledge Layer"]
-        TEL[Telstra Network Dataset]
-        DEV[Historical Device Incidents]
-        SOP[16 Technical SOP Playbooks]
-        IDX[FAISS Vector Indexes]
-        MOD[Trained ML Model]
-    end
-
-    subgraph EXT["External Services"]
-        LLM[OpenRouter / LLM]
-        AUTH[Google OAuth 2.0]
-    end
-
-    U --> UI
-
-    F --> FE
-    O --> FE
-    D --> FE
-    W --> CF
-    T --> IR
-
-    FE --> ML
-    ML --> SHAP
-    SHAP --> D
-
-    IR --> RAG
-    RAG --> IDX
-    IDX --> SOP
-    IDX --> DEV
-
-    IR --> LLM
-    D --> REC
-    REC --> SOP
-
-    CF --> ML
-
-    TEL --> FE
-    DEV --> IDX
-    SOP --> IDX
-    MOD --> ML
-
-    AUTH --> UI
-```
-
-### Architectural Flow
-
-**1. Data Layer**
-
-The system uses the Telstra Network Disruptions dataset together with indexed technical SOP documents and historical device information.
-
-**2. ML Layer**
-
-Telemetry-derived features are passed through preprocessing and feature engineering before being evaluated by a multiclass XGBoost classifier.
-
-**3. Explainability Layer**
-
-SHAP `TreeExplainer` calculates feature-level contributions for individual predictions, allowing operators to understand the primary factors influencing a fault classification.
-
-**4. Retrieval Layer**
-
-FAISS indexes provide semantic retrieval over:
-
-* Technical SOP playbooks
-* Historical device incidents
-
-Sentence Transformers generate embeddings using `all-MiniLM-L6-v2`.
-
-**5. Decision-Support Layer**
-
-The recommendation and counterfactual engines translate model outputs and retrieved evidence into actionable diagnostic context.
-
-**6. Operator Layer**
-
-Streamlit exposes the complete workflow through fleet monitoring, incident investigation, device diagnostics, simulation, and the Tilly NOC Assistant.
-
----
-
-# Core Capabilities
-
-## 1. Fleet Command Center
-
-A high-level operational view of the monitored network.
-
-**Capabilities**
+### 🔴 Fleet Command Center
 
 * Fleet health aggregation
-* Healthy / Warning / Critical distribution
+* Healthy / Warning / Critical device distribution
 * Fleet risk score visualization
 * Geographic risk visualization
 * Network topology visualization
 * Device search and severity filtering
 * Batch incident report generation
 
-The geographic visualization uses **synthetic coordinates derived from anonymized location identifiers** rather than real tower GPS data.
+### 🧠 Explainable Fault Prediction
+
+* Multiclass fault prediction using **XGBoost**
+* Feature-level explanations using **SHAP TreeExplainer**
+* Operator-readable diagnostic explanations
+* Device-level failure risk assessment
+* Composite device health scoring
+
+### 🔍 Evidence-Grounded Diagnostics
+
+* Semantic retrieval using **FAISS**
+* 16 technical telecom SOP playbooks
+* Historical device incident retrieval
+* Sentence Transformer embeddings
+* Evidence-backed troubleshooting recommendations
+
+### 🔄 What-If Counterfactual Simulator
+
+* Modify network conditions interactively
+* Recalculate relevant features
+* Run model inference without retraining
+* Compare projected risk levels
+* Explore hypothetical interventions before taking action
+
+### 🤖 Tilly — NOC Assistant
+
+Tilly is the conversational diagnostic assistant built into NERVE NOC.
+
+It intelligently routes operator queries to the appropriate system:
+
+* **Telemetry Query** → Pandas/DataFrame execution
+* **Device Diagnostic** → XGBoost prediction + SHAP
+* **SOP Lookup** → FAISS retrieval
+* **Historical Evidence** → Similar-device retrieval
+* **General / Off-topic** → Domain guardrail
+
+This hybrid approach reduces unnecessary dependence on LLMs for deterministic numerical queries.
+
+### 📊 Interactive Operations Workspace
+
+* Active incident stream
+* Severity-based incident prioritization
+* Interactive telemetry inference
+* Device investigation workflow
+* Diagnostic recommendations
+* Incident PDF generation
+
+### 🔐 Authentication
+
+* Google OAuth 2.0 authentication
+* Secure application access
+* Development authentication mode for local testing
+
+### 🌓 Modern NOC Interface
+
+* Streamlit-based command center
+* Interactive Plotly visualizations
+* Responsive operational dashboards
+* Network topology visualization
+* Geographic risk visualization
 
 ---
 
-## 2. Operations Workspace
+## 🛠️ Tech Stack
 
-Provides an interactive environment for investigating network conditions.
+### Machine Learning
 
-### Active Incident Stream
+* **XGBoost** — Multiclass fault classification
+* **SHAP** — Explainable AI and feature attribution
+* **Scikit-learn** — Preprocessing and evaluation
+* **Pandas** — Telemetry and data processing
+* **NumPy** — Numerical computation
 
-Incidents are prioritized by severity and can be opened directly for deeper investigation.
+### AI / RAG
 
-### Interactive Telemetry Inference
+* **FAISS** — Vector similarity search
+* **Sentence Transformers** — SOP and incident embeddings
+* **OpenRouter-compatible API** — Conversational reasoning
+* **Hybrid Intent Routing** — Deterministic queries + AI-assisted diagnostics
 
-Operators can modify telemetry-related inputs and run the trained XGBoost model to observe changes in predicted fault severity.
+### Frontend & Visualization
 
-This provides an interactive inference sandbox without requiring a new model training cycle.
+* **Streamlit** — NOC command center interface
+* **Plotly** — Interactive charts and network visualizations
+
+### Backend & Services
+
+* **Python** — Core application and ML services
+* **Google OAuth 2.0** — Authentication
+* **Joblib** — Model persistence
+* **JSON** — Playbook and application data storage
+* **FPDF2** — Incident report generation
 
 ---
 
-## 3. Device Diagnostic Engine
+## 📐 System Architecture
 
-The device detail view combines multiple sources of intelligence into one diagnostic workflow.
+### Architectural Flow
+
+NERVE NOC follows an end-to-end diagnostic intelligence architecture:
+
+```mermaid
+flowchart TD
+    A[Network Telemetry] --> B[Data Preprocessing]
+    B --> C[Feature Engineering]
+    C --> D[XGBoost Fault Prediction]
+    D --> E[SHAP Explainability]
+    E --> F[Risk & Health Assessment]
+    F --> G[Evidence Retrieval]
+    G --> H[FAISS SOP + Historical Incidents]
+    H --> I[Counterfactual What-If Engine]
+    I --> J[Recommendation Engine]
+    J --> K[Operator Decision Support]
+    K --> L[Incident Report]
+
+    M[Operator Query] --> N[Tilly Intent Router]
+    N --> O[Telemetry Query]
+    N --> P[Device Diagnostic]
+    N --> Q[SOP / RAG Lookup]
+    O --> R[Final Response]
+    P --> R
+    Q --> R
+```
+
+The architecture connects **machine-learning inference, explainability, retrieval, simulation, and operator decision-making** in a single NOC workflow.
+
+### Diagnostic Intelligence Pipeline
+
+```text
+Network Telemetry
+       ↓
+Feature Engineering
+       ↓
+XGBoost Fault Prediction
+       ↓
+SHAP Explainability
+       ↓
+Historical Evidence + SOP Retrieval
+       ↓
+Counterfactual Simulation
+       ↓
+Operator Recommendation
+       ↓
+Incident Report
+```
+
+This layered architecture allows NERVE NOC to move from **raw network data → prediction → explanation → evidence → simulation → actionable recommendation**.
+
+---
+
+## 🧩 Core Architecture
+
+### 1. Data Layer
+
+NERVE NOC uses:
+
+* Telstra Network Disruptions dataset
+* Technical SOP playbooks
+* Historical device information
+
+The system is designed for network-fault analysis and prototyping rather than live telecom infrastructure.
+
+### 2. ML Layer
+
+Telemetry-derived features are processed through preprocessing and feature engineering before being evaluated by a multiclass **XGBoost classifier**.
+
+### 3. Explainability Layer
+
+**SHAP TreeExplainer** identifies the features contributing most strongly to an individual fault prediction.
+
+Instead of exposing raw model outputs, NERVE NOC converts important factors into operator-readable diagnostic context.
+
+### 4. Retrieval Layer
+
+FAISS indexes provide semantic retrieval over:
+
+* Technical SOP playbooks
+* Historical device incidents
+
+Embeddings are generated using:
+
+```text
+all-MiniLM-L6-v2
+```
+
+### 5. Decision-Support Layer
+
+The recommendation and counterfactual engines combine:
+
+* Model predictions
+* SHAP explanations
+* Retrieved evidence
+* Hypothetical scenario analysis
+
+to provide actionable diagnostic context.
+
+### 6. Operator Layer
+
+Streamlit exposes the complete workflow through:
+
+* Fleet monitoring
+* Incident investigation
+* Device diagnostics
+* What-if simulation
+* Tilly NOC Assistant
+
+---
+
+## 🔄 Diagnostic Workflow
+
+```text
+┌─────────────────────┐
+│   Network Telemetry │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Feature Engineering │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ XGBoost Prediction  │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│  SHAP Explanation   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Evidence Retrieval  │
+│   SOP + Incidents   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ What-If Simulation   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Operator Recommendation │
+└─────────────────────┘
+```
+
+---
+
+## 🤖 Tilly — NOC Assistant
+
+Tilly acts as the conversational intelligence layer of NERVE NOC.
+
+Instead of forwarding every question directly to an LLM, Tilly first classifies the operator's intent.
+
+```text
+                 Operator Query
+                       │
+                       ▼
+              Intent Classification
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+    Telemetry       Device         SOP / RAG
+      Query        Diagnostic        Lookup
+        │              │              │
+        ▼              ▼              ▼
+    DataFrame      Prediction       FAISS
+    Execution       + SHAP         Retrieval
+        │              │              │
+        └──────────────┼──────────────┘
+                       ▼
+                 Final Response
+```
+
+### Supported Intents
+
+| Intent              | Processing                        |
+| ------------------- | --------------------------------- |
+| Telemetry Query     | Direct Pandas/DataFrame execution |
+| Device Diagnostic   | Device-specific prediction + SHAP |
+| SOP Lookup          | FAISS semantic retrieval          |
+| Historical Evidence | Similar-device retrieval          |
+| General / Off-topic | Domain guardrail                  |
+
+---
+
+## 📊 Device Diagnostic Engine
+
+The device diagnostic view combines multiple intelligence sources.
 
 ### Health & Risk
 
@@ -198,9 +323,7 @@ Displays:
 
 ### Explainable AI
 
-For each prediction, SHAP identifies the features contributing most strongly to the classification.
-
-Instead of exposing raw model values alone, NERVE translates important features into operator-readable explanations.
+For every prediction, SHAP identifies the features contributing most strongly to the classification.
 
 Example:
 
@@ -209,46 +332,42 @@ Prediction
     ↓
 Severity: CRITICAL
 
-Top contributing factors
-    ├── Event volume       → High impact
-    ├── Resource usage     → High impact
-    ├── Network condition  → Moderate impact
-    └── Location pattern  → Moderate impact
+Top Contributing Factors
+    ├── Event Volume       → High Impact
+    ├── Resource Usage     → High Impact
+    ├── Network Condition  → Moderate Impact
+    └── Location Pattern   → Moderate Impact
 ```
 
 ---
 
-## 4. What-If Counterfactual Simulator
+## 🔄 What-If Counterfactual Analysis
 
-The simulator allows operators to explore hypothetical interventions before taking action.
-
-For example:
+The simulator allows operators to investigate hypothetical changes to network conditions.
 
 ```text
-Current network condition
+Current Network Condition
           ↓
-Reduce anomaly / traffic volume
+Modify Network Variable
           ↓
-Recalculate feature values
+Recalculate Features
           ↓
-Run model inference
+Run Model Inference
           ↓
-Compare projected risk
+Compare Projected Risk
 ```
 
-This allows operators to investigate questions such as:
+Example question:
 
 > **“If the abnormal traffic volume were reduced, how would the predicted device risk change?”**
 
-The simulator is a **model-based counterfactual analysis tool**, not an automated network-control system.
+The simulator is a **model-based counterfactual analysis tool** and does not directly control network infrastructure.
 
 ---
 
-## 5. Evidence-Grounded SOP Verification
+## 📚 Evidence-Grounded SOP Retrieval
 
 NERVE NOC indexes **16 technical SOP playbooks** using vector embeddings and FAISS.
-
-The retrieval pipeline is:
 
 ```text
 Operator Query
@@ -264,71 +383,11 @@ Relevant SOP / Historical Incident
 Diagnostic Context
 ```
 
-Retrieved evidence is used to support troubleshooting recommendations rather than relying solely on generative model output.
+Retrieved evidence is used to support troubleshooting recommendations rather than relying exclusively on generative model output.
 
 ---
 
-# Tilly — NOC Assistant
-
-**Tilly** is the conversational diagnostic interface inside NERVE NOC.
-
-Instead of sending every query directly to an LLM, Tilly first determines the type of request.
-
-```text
-                    Operator Query
-                         │
-                         ▼
-                  Intent Classification
-                         │
-          ┌──────────────┼──────────────┐
-          ▼              ▼              ▼
-     Telemetry        Device          SOP / RAG
-      Query          Diagnostic        Lookup
-          │              │              │
-          ▼              ▼              ▼
-     DataFrame       Prediction       FAISS
-     Execution       + SHAP           Retrieval
-          │              │              │
-          └──────────────┼──────────────┘
-                         ▼
-                    Final Response
-```
-
-### Supported Intent Categories
-
-| Intent              | Processing                          |
-| ------------------- | ----------------------------------- |
-| Telemetry Query     | Direct Pandas/DataFrame execution   |
-| Device Diagnostic   | Device-specific model + explanation |
-| SOP Lookup          | FAISS semantic retrieval            |
-| Historical Evidence | Similar-device retrieval            |
-| General / Off-topic | Domain guardrail                    |
-
-This routing approach reduces unnecessary LLM dependence for deterministic numerical queries.
-
----
-
-# Technology Stack
-
-| Layer           | Technology                | Purpose                              |
-| --------------- | ------------------------- | ------------------------------------ |
-| UI              | Streamlit                 | NOC command center                   |
-| Visualization   | Plotly                    | Interactive charts and network views |
-| ML              | XGBoost                   | Multiclass fault classification      |
-| Explainability  | SHAP                      | Feature-level model explanations     |
-| ML Utilities    | Scikit-learn              | Preprocessing and evaluation         |
-| Data Processing | Pandas, NumPy             | Telemetry processing                 |
-| RAG             | FAISS                     | Vector similarity retrieval          |
-| Embeddings      | Sentence Transformers     | SOP / incident embeddings            |
-| LLM             | OpenRouter-compatible API | Conversational reasoning             |
-| Backend         | Python                    | Application and ML services          |
-| Reporting       | FPDF2                     | Incident PDF generation              |
-| Authentication  | Google OAuth 2.0          | User authentication                  |
-| Persistence     | Joblib, JSON              | Models and playbook storage          |
-
----
-
-# Project Structure
+## 📁 Project Structure
 
 ```text
 NERVE-NOC/
@@ -365,7 +424,9 @@ NERVE-NOC/
     └── what_if_engine.py
 ```
 
-### Module Responsibilities
+---
+
+## 🧱 Module Responsibilities
 
 | Module              | Responsibility                                |
 | ------------------- | --------------------------------------------- |
@@ -382,15 +443,15 @@ NERVE-NOC/
 
 ---
 
-# Engineering Highlights
+## ✨ Engineering Highlights
 
-### Explainable ML
+### Explainable Machine Learning
 
-Uses SHAP TreeExplainer to expose **why an individual prediction was made**, rather than treating the classifier as a black box.
+Uses **SHAP TreeExplainer** to expose why an individual prediction was made.
 
 ### Hybrid RAG Architecture
 
-Combines deterministic telemetry computation with semantic retrieval instead of routing every question through an LLM.
+Combines deterministic telemetry computation with semantic retrieval rather than sending every query through an LLM.
 
 ### Multi-Index Retrieval
 
@@ -399,15 +460,13 @@ Maintains separate FAISS indexes for:
 * Technical SOP knowledge
 * Historical device incidents
 
-This enables retrieval from both procedural knowledge and historical evidence.
-
 ### Counterfactual Analysis
 
-Allows operators to evaluate hypothetical changes to network conditions and observe the resulting model prediction.
+Allows operators to evaluate hypothetical network changes and observe their impact on model predictions.
 
 ### Domain Guardrails
 
-Tilly restricts conversational functionality to the network-diagnostics domain and prevents unrelated queries from being treated as technical requests.
+Tilly restricts conversational functionality to network-diagnostics-related requests.
 
 ### Operational Reporting
 
@@ -415,30 +474,32 @@ Diagnostic information can be converted into individual PDF incident reports or 
 
 ---
 
-# Implemented vs Roadmap
+## ✅ Implemented vs Roadmap
 
-| Capability                         | Status |
-| ---------------------------------- | :----: |
-| Multiclass Fault Prediction        |    ✅   |
-| XGBoost Inference                  |    ✅   |
-| SHAP Explainability                |    ✅   |
-| Interactive What-If Simulation     |    ✅   |
-| Hybrid Intent Routing              |    ✅   |
-| FAISS SOP Retrieval                |    ✅   |
-| Historical Device Retrieval        |    ✅   |
-| 16 SOP Playbooks                   |    ✅   |
-| Device Diagnostic View             |    ✅   |
-| Network Topology Visualization     |    ✅   |
-| Geographic Risk Visualization      |    ✅   |
-| PDF Incident Reports               |    ✅   |
-| Google OAuth                       |    ✅   |
-| Kafka Telemetry Streaming          |   🗺️  |
-| Live GIS / Tower GPS               |   🗺️  |
-| Automated Self-Healing Remediation |   🗺️  |
+| Capability                         | Status        |
+| ---------------------------------- | ------------- |
+| Multiclass Fault Prediction        | ✅ Implemented |
+| XGBoost Inference                  | ✅ Implemented |
+| SHAP Explainability                | ✅ Implemented |
+| Interactive What-If Simulation     | ✅ Implemented |
+| Hybrid Intent Routing              | ✅ Implemented |
+| FAISS SOP Retrieval                | ✅ Implemented |
+| Historical Device Retrieval        | ✅ Implemented |
+| 16 SOP Playbooks                   | ✅ Implemented |
+| Device Diagnostic View             | ✅ Implemented |
+| Network Topology Visualization     | ✅ Implemented |
+| Geographic Risk Visualization      | ✅ Implemented |
+| PDF Incident Reports               | ✅ Implemented |
+| Google OAuth                       | ✅ Implemented |
+| Kafka Telemetry Streaming          | 🗺️ Roadmap   |
+| Live GIS / Tower GPS               | 🗺️ Roadmap   |
+| Automated Self-Healing Remediation | 🗺️ Roadmap   |
 
-### Future Architecture
+---
 
-The current system is designed so that future telemetry ingestion can be extended with:
+## 🔮 Future Architecture
+
+Future telemetry ingestion can be extended with streaming infrastructure:
 
 ```text
 Kafka / Streaming Telemetry
@@ -451,61 +512,61 @@ NERVE Prediction Engine
           ↓
 Risk Detection
           ↓
-Automated / Human-approved Remediation
+Automated / Human-Approved Remediation
 ```
 
-These components are **roadmap items and are not represented as implemented functionality in the current system**.
+These are **roadmap components** and are not represented as implemented functionality in the current system.
 
 ---
 
-# Local Development
+## ⚙️ Local Development
 
-## Prerequisites
+### Prerequisites
 
 * Python 3.10+
 * Python 3.11 recommended
 * Git
 
-## Clone
+### Clone Repository
 
 ```bash
 git clone https://github.com/your-username/NERVE-NOC.git
 cd NERVE-NOC
 ```
 
-## Create Virtual Environment
+### Create Virtual Environment
 
-### Windows
+#### Windows
 
 ```bash
 python -m venv venv
 .\venv\Scripts\activate
 ```
 
-### Linux / macOS
+#### Linux / macOS
 
 ```bash
 python -m venv venv
 source venv/bin/activate
 ```
 
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Configure Environment
+### Configure Environment
 
-Copy `.env.template` to `.env`.
+Copy `.env.template` to `.env`:
 
 ```bash
 cp .env.template .env
 ```
 
-Configure the required variables:
+Configure:
 
-```ini
+```env
 OPENROUTER_API_KEY=your_openrouter_api_key_here
 OPENROUTER_MODEL=openrouter/free
 
@@ -517,15 +578,13 @@ DEV_AUTH=true
 
 > **Security:** Never commit `.env`, API keys, OAuth secrets, or other credentials to the repository.
 
-`DEV_AUTH=true` enables the local development authentication path, where supported by the application.
-
-## Run
+### Run Application
 
 ```bash
 streamlit run app.py
 ```
 
-Then open:
+Open:
 
 ```text
 http://localhost:8501
@@ -533,19 +592,19 @@ http://localhost:8501
 
 ---
 
-# Dataset
+## 📊 Dataset
 
 NERVE NOC is built using the **Telstra Network Disruptions dataset**, which contains network event and service-disruption information suitable for developing predictive network-fault analysis workflows.
 
-The dataset is used for research/prototyping purposes and does **not represent live telecom infrastructure**.
+The dataset is used for **research and prototyping purposes** and does not represent live telecom infrastructure.
 
-Geographic coordinates shown in the application are synthetic/anonymized visual positioning and should not be interpreted as real tower locations.
+> Geographic coordinates displayed in the application are synthetic/anonymized visual positioning and should not be interpreted as real tower locations.
 
 ---
 
-# Team
+## 👥 Team
 
-**NERVE NOC — Network Emergency & Risk Visualization Engine**
+### NERVE NOC — Network Emergency & Risk Visualization Engine
 
 * **Sivasakthi E** — Team Lead
 * **Shiju S**
@@ -555,9 +614,9 @@ Geographic coordinates shown in the application are synthetic/anonymized visual 
 
 ---
 
-# Project Status
+## 📌 Project Status
 
-**Current status:** Functional prototype / hackathon implementation
+**Current Status:** Functional Prototype / Hackathon Implementation
 
 NERVE NOC demonstrates an end-to-end architecture connecting:
 
@@ -577,10 +636,19 @@ Counterfactual Analysis
 Operator Decision Support
 ```
 
-The architecture is intentionally modular so that production-oriented components such as streaming telemetry, live geospatial infrastructure data, model monitoring, and controlled remediation can be added independently.
+The architecture is intentionally modular, allowing production-oriented components such as streaming telemetry, live geospatial infrastructure data, model monitoring, and controlled remediation to be added independently.
 
 ---
 
-## License
+## 📜 License
 
-Add the project's chosen license here before publishing the repository.
+MIT License
+
+---
+
+### NERVE NOC
+
+**From prediction to explanation.
+From evidence to action.**
+
+> **Diagnose smarter. Respond faster. Operate with confidence.**
