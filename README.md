@@ -87,38 +87,6 @@ This hybrid approach reduces unnecessary dependence on LLMs for deterministic nu
 
 ---
 
-## 🛠️ Tech Stack
-
-### Machine Learning
-
-* **XGBoost** — Multiclass fault classification
-* **SHAP** — Explainable AI and feature attribution
-* **Scikit-learn** — Preprocessing and evaluation
-* **Pandas** — Telemetry and data processing
-* **NumPy** — Numerical computation
-
-### AI / RAG
-
-* **FAISS** — Vector similarity search
-* **Sentence Transformers** — SOP and incident embeddings
-* **OpenRouter-compatible API** — Conversational reasoning
-* **Hybrid Intent Routing** — Deterministic queries + AI-assisted diagnostics
-
-### Frontend & Visualization
-
-* **Streamlit** — NOC command center interface
-* **Plotly** — Interactive charts and network visualizations
-
-### Backend & Services
-
-* **Python** — Core application and ML services
-* **Google OAuth 2.0** — Authentication
-* **Joblib** — Model persistence
-* **JSON** — Playbook and application data storage
-* **FPDF2** — Incident report generation
-
----
-
 ## 📐 System Architecture
 
 ### Architectural Flow
@@ -171,6 +139,38 @@ Incident Report
 ```
 
 This layered architecture allows NERVE NOC to move from **raw network data → prediction → explanation → evidence → simulation → actionable recommendation**.
+
+---
+
+## 🛠️ Tech Stack
+
+### Machine Learning
+
+* **XGBoost** — Multiclass fault classification
+* **SHAP** — Explainable AI and feature attribution
+* **Scikit-learn** — Preprocessing and evaluation
+* **Pandas** — Telemetry and data processing
+* **NumPy** — Numerical computation
+
+### AI / RAG
+
+* **FAISS** — Vector similarity search
+* **Sentence Transformers** — SOP and incident embeddings
+* **OpenRouter-compatible API** — Conversational reasoning
+* **Hybrid Intent Routing** — Deterministic queries + AI-assisted diagnostics
+
+### Frontend & Visualization
+
+* **Streamlit** — NOC command center interface
+* **Plotly** — Interactive charts and network visualizations
+
+### Backend & Services
+
+* **Python** — Core application and ML services
+* **Google OAuth 2.0** — Authentication
+* **Joblib** — Model persistence
+* **JSON** — Playbook and application data storage
+* **FPDF2** — Incident report generation
 
 ---
 
@@ -648,6 +648,6 @@ MIT License
 
 ### NERVE NOC
 
-Predict. Explain. Investigate. Respond.
+**Predict. Explain. Investigate. Respond.**
 
-Turning network intelligence into faster, evidence-driven decisions.
+> **Turning network intelligence into faster, evidence-driven decisions.**
