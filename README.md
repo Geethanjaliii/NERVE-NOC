@@ -648,7 +648,6 @@ MIT License
 
 ### NERVE NOC
 
-**From prediction to explanation.
-From evidence to action.**
+Predict. Explain. Investigate. Respond.
 
-> **Diagnose smarter. Respond faster. Operate with confidence.**
+Turning network intelligence into faster, evidence-driven decisions.
