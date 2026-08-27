@@ -1,0 +1,227 @@
+[
+  {
+    "id": "SOP-RES-01",
+    "title": "Telecom SOP §1.1 — Core Optical Transport & DWDM Fiber Switch (Resource Type 1)",
+    "target_category": "resource_type 1",
+    "trigger": "resource_type 1 alerts or optical loss warnings",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Operating procedure for optical transport switch degradation, laser drift, or chromatic dispersion on Resource Type 1.",
+    "standard_operating_procedure": [
+      "Check Bit Error Rate (BER) counters and optical power levels on ingress and egress transponders.",
+      "Verify DWDM wavelength alignment and optical amplifier gain tilt.",
+      "If optical signal-to-noise ratio (OSNR) drops below 18dB, switch traffic to protection fiber path."
+    ],
+    "citation": "Telecom SOP Manual §1.1 (Optical Transport)"
+  },
+  {
+    "id": "SOP-RES-02",
+    "title": "Telecom SOP §1.2 — Edge BGP / MPLS Provider Edge Router (Resource Type 2)",
+    "target_category": "resource_type 2",
+    "trigger": "resource_type 2 alerts, route flaps, or multi-event routing storms",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Troubleshooting protocol for MPLS provider edge router interface flaps, routing loops, and session resets on Resource Type 2.",
+    "standard_operating_procedure": [
+      "Inspect BGP session state, keepalive timer intervals, and prefix limit drops.",
+      "Verify MTU configuration consistency across adjacent peer interfaces.",
+      "If multipath failover storms (Event 42, 43, 44) occur, pin traffic to primary MPLS tunnel and damp flapping routes."
+    ],
+    "citation": "Telecom SOP Manual §1.2 (MPLS Edge Routing)"
+  },
+  {
+    "id": "SOP-RES-03",
+    "title": "Telecom SOP §1.3 — Microwave Wireless Backhaul Transceiver (Resource Type 3)",
+    "target_category": "resource_type 3",
+    "trigger": "resource_type 3 alerts, rain fade, or dish alignment drift",
+    "severity_scope": ["Class 0", "Class 1"],
+    "description": "Resolution procedure for wireless backhaul signal attenuation, RSSI degradation, or adaptive modulation drops on Resource Type 3.",
+    "standard_operating_procedure": [
+      "Check Received Signal Strength Indicator (RSSI) against baseline link budget.",
+      "Enable adaptive coding and modulation (ACM) to maintain link stability under adverse atmospheric conditions.",
+      "Inspect antenna physical alignment and coaxial waveguide integrity if degradation persists."
+    ],
+    "citation": "Telecom SOP Manual §1.3 (Wireless Backhaul)"
+  },
+  {
+    "id": "SOP-RES-04",
+    "title": "Telecom SOP §1.4 — High-Density Switching Fabric Card (Resource Type 4)",
+    "target_category": "resource_type 4",
+    "trigger": "resource_type 4 alerts, ASIC parity errors, or fabric buffer exhaustion",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Emergency remediation protocol for switching fabric packet drops, buffer overflow, and backplane bus contention on Resource Type 4.",
+    "standard_operating_procedure": [
+      "Inspect egress buffer queue depth and packet discard counters across fabric ASICs.",
+      "Initiate graceful fabric plane rebalancing to offload congested switching slices.",
+      "If parity error detected, trigger diagnostic self-test and schedule module replacement."
+    ],
+    "citation": "Telecom SOP Manual §1.4 (Switching Fabric)"
+  },
+  {
+    "id": "SOP-RES-05",
+    "title": "Telecom SOP §1.5 — Substation Power Distribution Unit & UPS (Resource Type 5)",
+    "target_category": "resource_type 5",
+    "trigger": "resource_type 5 alerts, voltage sag, or phase imbalance",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Safety and electrical remediation for substation PDU, DC rectifier, and battery backup alarms on Resource Type 5.",
+    "standard_operating_procedure": [
+      "Verify -48V DC bus voltage and rectifier load sharing across power shelves.",
+      "Check UPS battery discharge state and thermal sensor readings.",
+      "Dispatch field electrical team immediately if secondary rectifier feed has tripped."
+    ],
+    "citation": "Telecom SOP Manual §1.5 (Power Infrastructure)"
+  },
+  {
+    "id": "SOP-RES-06",
+    "title": "Telecom SOP §1.6 — Cellular Baseband Unit & RAN Controller (Resource Type 6)",
+    "target_category": "resource_type 6",
+    "trigger": "resource_type 6 alerts, CPRI synchronization failure, or radio frame loss",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Procedures for baseband unit clock loss, CPRI/eCPRI optical interface errors, and sector carrier drops on Resource Type 6.",
+    "standard_operating_procedure": [
+      "Verify GPS / IEEE 1588 Precision Time Protocol (PTP) synchronization lock.",
+      "Check optical transceivers linking BBU to Remote Radio Heads (RRH).",
+      "Perform soft reset of digital signal processing (DSP) pool if carrier allocation fails."
+    ],
+    "citation": "Telecom SOP Manual §1.6 (RAN Baseband Systems)"
+  },
+  {
+    "id": "SOP-RES-07",
+    "title": "Telecom SOP §1.7 — Carrier Ethernet Access Node & DSLAM/OLT (Resource Type 7)",
+    "target_category": "resource_type 7",
+    "trigger": "resource_type 7 alerts, broadcast storms, or subscriber port flapping",
+    "severity_scope": ["Class 0", "Class 1"],
+    "description": "Remediation workflow for last-mile aggregation access nodes, GPON OLT line cards, and MAC address table exhaustion on Resource Type 7.",
+    "standard_operating_procedure": [
+      "Apply broadcast/multicast storm suppression filters on uplink trunk ports.",
+      "Verify optical split ratio and subscriber ONT optical power levels.",
+      "Clear stagnant MAC learning entries and monitor port status for 10 minutes."
+    ],
+    "citation": "Telecom SOP Manual §1.7 (Access Networks)"
+  },
+  {
+    "id": "SOP-RES-08",
+    "title": "Telecom SOP §1.8 — Primary Optical Line Terminal & Fiber Distribution Hub (Resource Type 8)",
+    "target_category": "resource_type 8",
+    "trigger": "resource_type 8 alerts, high optical receiver overload, or core backhaul degradation",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Critical response protocol for primary optical distribution hub line cards, feeder fiber attenuation, and transceiver faults on Resource Type 8.",
+    "standard_operating_procedure": [
+      "Isolate fiber line transceivers on Resource Type 8 and inspect optical launch power.",
+      "Execute automated Optical Time Domain Reflectometer (OTDR) trace to locate physical fiber breaks or high-attenuation bends.",
+      "Clean SC/APC optical patch connectors and verify optical link loss budget (<15dB).",
+      "If accompanied by log_feature 82 surge or Event 15 reset, initiate immediate field dispatch for line card replacement."
+    ],
+    "citation": "Telecom SOP Manual §1.8 (Fiber Distribution Hubs)"
+  },
+  {
+    "id": "SOP-RES-09",
+    "title": "Telecom SOP §1.9 — Environmental Site Sensors & HVAC Systems (Resource Type 9)",
+    "target_category": "resource_type 9",
+    "trigger": "resource_type 9 alerts, high temperature, or humidity thresholds",
+    "severity_scope": ["Class 0", "Class 1"],
+    "description": "Protocol for cabinet thermal excursions, cooling unit failure, and site humidity alarms on Resource Type 9.",
+    "standard_operating_procedure": [
+      "Check cabinet internal temperature probe readings against 35°C threshold.",
+      "Activate backup HVAC cooling unit and verify air filter intake clearance.",
+      "If temperature exceeds 45°C, initiate graceful traffic shed to prevent thermal equipment shutdown."
+    ],
+    "citation": "Telecom SOP Manual §1.9 (Environmental Controls)"
+  },
+  {
+    "id": "SOP-RES-10",
+    "title": "Telecom SOP §1.10 — Security Gateway & Deep Packet Inspection Appliance (Resource Type 10)",
+    "target_category": "resource_type 10",
+    "trigger": "resource_type 10 alerts, state table exhaustion, or DDoS throttling",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Incident workflow for security gateway state table saturation, crypto engine bottlenecks, and packet inspection overloads on Resource Type 10.",
+    "standard_operating_procedure": [
+      "Inspect active TCP connection state table utilization against maximum threshold.",
+      "Flush expired session timers and engage hardware SYN-cookie defense.",
+      "Bypass non-critical deep packet inspection policies to maintain transit line-rate throughput."
+    ],
+    "citation": "Telecom SOP Manual §1.10 (Security Gateways)"
+  },
+  {
+    "id": "SOP-EVT-11",
+    "title": "Telecom SOP §2.1 — Link State Flapping & Loss of Signal (Event Type 11)",
+    "target_category": "event_type 11",
+    "trigger": "event_type 11 registered in log stream",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Standard procedure for physical link loss-of-signal (LOS) alarms and continuous port flapping events.",
+    "standard_operating_procedure": [
+      "Inspect optical power levels and physical seating of SFP+/QSFP transceivers.",
+      "Configure link debounce timer (100ms) to prevent rapid route withdrawal storms.",
+      "If link fails to stabilize within 5 flap cycles, force failover to redundant standby link."
+    ],
+    "citation": "Telecom SOP Manual §2.1 (Physical Layer Alarms)"
+  },
+  {
+    "id": "SOP-EVT-15",
+    "title": "Telecom SOP §2.2 — Critical Module Parity Error & Abrupt Reset (Event Type 15)",
+    "target_category": "event_type 15",
+    "trigger": "event_type 15 registered in log stream",
+    "severity_scope": ["Class 2"],
+    "description": "Emergency protocol for abrupt hardware module reboots, uncorrectable memory parity errors, and kernel panics.",
+    "standard_operating_procedure": [
+      "Capture kernel crash dump logs and line card register states before restart.",
+      "Isolate the failing module from the active forwarding plane to prevent split-brain routing.",
+      "Schedule urgent on-site technician intervention for physical module swap."
+    ],
+    "citation": "Telecom SOP Manual §2.2 (Hardware Parity & Reset)"
+  },
+  {
+    "id": "SOP-EVT-42-44",
+    "title": "Telecom SOP §2.3 — Multipath Route Storm & Convergence Loop (Event Types 42, 43, 44)",
+    "target_category": "event_type 42, event_type 43, event_type 44",
+    "trigger": "Co-occurrence of event_type 42, 43, 44",
+    "severity_scope": ["Class 2"],
+    "description": "Resolution procedure for cascading routing protocol convergence loops and multipath failover storms.",
+    "standard_operating_procedure": [
+      "Activate BGP route dampening to penalize persistently flapping peer prefixes.",
+      "Force traffic onto deterministic static label-switched paths (LSP).",
+      "Inspect upstream transit provider links for wide-area fiber cuts."
+    ],
+    "citation": "Telecom SOP Manual §2.3 (Routing Protocol Storms)"
+  },
+  {
+    "id": "SOP-LOG-82",
+    "title": "Telecom SOP §3.1 — High-Volume Framing Error & Buffer Congestion (Log Feature 82)",
+    "target_category": "log_feature 82",
+    "trigger": "log_feature 82 volume >= 20",
+    "severity_scope": ["Class 2"],
+    "description": "Diagnostics for severe frame check sequence (FCS) errors, buffer overruns, and packet corruption on critical optical interfaces.",
+    "standard_operating_procedure": [
+      "Purge transit buffer queue and inspect port error counters for CRC/FCS increments.",
+      "Verify optical signal-to-noise ratio and clean optical fiber connectors.",
+      "Cross-reference with Resource Type 8 status to assess line card degradation."
+    ],
+    "citation": "Telecom SOP Manual §3.1 (Framing & Buffer Anomalies)"
+  },
+  {
+    "id": "SOP-LOG-203",
+    "title": "Telecom SOP §3.2 — Hardware Interrupt Loop & Queue Starvation (Log Feature 203)",
+    "target_category": "log_feature 203",
+    "trigger": "log_feature 203 volume >= 10",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Remediation for CPU interrupt storming, driver watchdog timeouts, and telemetry queue starvation.",
+    "standard_operating_procedure": [
+      "Inspect line card CPU utilization and disable verbose debug logging.",
+      "Restart the local device telemetry polling agent.",
+      "If CPU remains pegged >95%, trigger controlled sub-card reload."
+    ],
+    "citation": "Telecom SOP Manual §3.2 (Interrupt Loops & CPU Watchdogs)"
+  },
+  {
+    "id": "SOP-LOG-71",
+    "title": "Telecom SOP §3.3 — Packet Drop Threshold Exceeded (Log Feature 71)",
+    "target_category": "log_feature 71",
+    "trigger": "log_feature 71 volume >= 15",
+    "severity_scope": ["Class 1", "Class 2"],
+    "description": "Bandwidth saturation and tail-drop resolution protocol.",
+    "standard_operating_procedure": [
+      "Verify traffic bandwidth against interface link capacity.",
+      "Tune Weighted Random Early Detection (WRED) queue profiles.",
+      "Re-route non-critical bulk traffic to secondary link."
+    ],
+    "citation": "Telecom SOP Manual §3.3 (Traffic Saturation)"
+  }
+]

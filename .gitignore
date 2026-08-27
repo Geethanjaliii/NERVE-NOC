@@ -1,0 +1,35 @@
+﻿# Environment & Secrets
+.env
+.env.local
+*.secret
+*.pem
+*.key
+
+# Python Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local Streamlit data & logs
+.streamlit/secrets.toml
+*.log
